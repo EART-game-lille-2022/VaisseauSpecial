@@ -5,13 +5,6 @@ using UnityEngine.XR.Content.Interaction;
 
 public class ShipMovement : MonoBehaviour
 {
-<<<<<<< Updated upstream
-
-
-
-    void Update()
-    {
-=======
     [Header("Speed :")]
     [SerializeField] private float _speedMultiplier;
 
@@ -60,6 +53,5 @@ public class ShipMovement : MonoBehaviour
 
         _rotateDirection = (_rotationLeft + _rotationRight) * _rotationSpeed;
         transform.Rotate(Vector3.up * _rotateDirection * Time.deltaTime); 
->>>>>>> Stashed changes
     }
 }
