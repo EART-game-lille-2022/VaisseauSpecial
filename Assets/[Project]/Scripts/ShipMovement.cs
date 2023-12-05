@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.XR.Content.Interaction;
 
@@ -18,6 +19,12 @@ public class ShipMovement : MonoBehaviour
     private float _speed;
     private float _speedLeft;
     private float _speedRight;
+    private Rigidbody _rigidbody;
+
+    void Start()
+    {
+        _rigidbody = GetComponent<Rigidbody>();
+    }
 
     public void ChangeDirection()
     {
@@ -49,7 +56,8 @@ public class ShipMovement : MonoBehaviour
     void Update()
     {
         _speed = Mathf.InverseLerp(0, 2, _speedLeft + _speedRight) * _speedMultiplier;
-        transform.Translate(-Vector3.right * _speed * Time.deltaTime * _direction);
+        _rigidbody.AddForce(transform.right * _speed * _direction, ForceMode.Force);
+        // transform.Translate(Vector3.right * _speed * Time.deltaTime * _direction);
 
         _rotateDirection = (_rotationLeft + _rotationRight) * _rotationSpeed;
         transform.Rotate(Vector3.up * _rotateDirection * Time.deltaTime); 
