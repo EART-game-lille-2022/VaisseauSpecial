@@ -7,7 +7,8 @@ using UnityEngine.XR.Content.Interaction;
 public class ShipMovement : MonoBehaviour
 {
     [Header("Speed :")]
-    [SerializeField] private float _speedMultiplier;
+    [SerializeField] private float _horizontalSpeedMultiplier;
+    [SerializeField] private float _verticalSpeedMultiplier;
 
     [Header("Rotation :")]
     [SerializeField] private float _rotationSpeed;
@@ -16,14 +17,12 @@ public class ShipMovement : MonoBehaviour
     private float _rotationLeft;
     private float _rotationRight;
     private int _direction = 1;
-    private float _speed;
+    private float _verticalSpeed;
     private float _speedLeft;
     private float _speedRight;
-    private Rigidbody _rigidbody;
 
-    void Start()
-    {
-        _rigidbody = GetComponent<Rigidbody>();
+    public void OnChangeVerticalMove(float value){
+        _verticalSpeed = Mathf.Lerp(-1, 1, value);
     }
 
     public void ChangeDirection()
@@ -34,13 +33,11 @@ public class ShipMovement : MonoBehaviour
     public void UpdateRotationLeft(float value)
     {
         _rotationLeft = Mathf.Lerp(0, 90, value);
-        print(_rotationLeft);
     }
 
     public void UpdateRotationRight(float value)
     {
         _rotationRight = Mathf.Lerp(0, -90, value);
-        print(_rotationRight);
     }
 
     public void UpdateSpeedLeft(float value)
@@ -53,13 +50,29 @@ public class ShipMovement : MonoBehaviour
         _speedRight = value;
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        _speed = Mathf.InverseLerp(0, 2, _speedLeft + _speedRight) * _speedMultiplier;
-        _rigidbody.AddForce(transform.right * _speed * _direction, ForceMode.Force);
-        // transform.Translate(Vector3.right * _speed * Time.deltaTime * _direction);
+        HorizontalMove();
+        VerticalMovement();
+        HorizontalRotation();
+    }
 
+    private void VerticalMovement()
+    {
+        // _rigidbody.AddForce(transform.up * _verticalSpeed * _verticalSpeedMultiplier, ForceMode.Force);
+        transform.Translate(Vector3.up * _verticalSpeed * Time.fixedDeltaTime * _verticalSpeedMultiplier);
+    }
+
+    private void HorizontalRotation()
+    {
         _rotateDirection = (_rotationLeft + _rotationRight) * _rotationSpeed;
-        transform.Rotate(Vector3.up * _rotateDirection * Time.deltaTime); 
+        transform.Rotate(Vector3.up * _rotateDirection * Time.fixedDeltaTime);
+    }
+
+    private void HorizontalMove()
+    {
+        // _rigidbody.AddForce(transform.right * _horizontalSpeed * _direction, ForceMode.Force);
+        float speed = Mathf.InverseLerp(0, 2, _speedLeft + _speedRight) * _horizontalSpeedMultiplier;
+        transform.Translate(Vector3.right * speed * Time.fixedDeltaTime * _direction);
     }
 }
