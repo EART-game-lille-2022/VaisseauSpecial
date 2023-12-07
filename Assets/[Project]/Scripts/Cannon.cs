@@ -58,6 +58,11 @@ public class Cannon : MonoBehaviour
         _rotateVector.y = 0;
     }
 
+    void Shoot()
+    {
+        
+    }
+
     void Update()
     {
         transform.Rotate(new Vector3(0, _rotateVector.y, 0) * _speed);
