@@ -20,6 +20,12 @@ public class ShipMovement : MonoBehaviour
     private float _verticalSpeed;
     private float _speedLeft;
     private float _speedRight;
+    private Motors _motors;
+
+    void Start()
+    {
+        _motors = GetComponent<Motors>();
+    }
 
     public void OnChangeVerticalMove(float value){
         _verticalSpeed = Mathf.Lerp(-1, 1, value);
@@ -72,7 +78,9 @@ public class ShipMovement : MonoBehaviour
     private void HorizontalMove()
     {
         // _rigidbody.AddForce(transform.right * _horizontalSpeed * _direction, ForceMode.Force);
-        float speed = Mathf.InverseLerp(0, 2, _speedLeft + _speedRight) * _horizontalSpeedMultiplier;
-        transform.Translate(Vector3.forward * speed * Time.fixedDeltaTime * _direction);
+        float speedFactor = Mathf.InverseLerp(0, 2, _speedLeft + _speedRight) * _horizontalSpeedMultiplier;
+        _motors.UpdateHeat(speedFactor);
+
+        transform.Translate(Vector3.forward * speedFactor * Time.fixedDeltaTime * _direction);
     }
 }
