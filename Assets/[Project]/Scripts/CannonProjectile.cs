@@ -10,6 +10,7 @@ public class CannonProjectile : MonoBehaviour
     [SerializeField] private AnimationCurve _sizeCurve;
     private LineRenderer _line;
     private float time;
+    private GameObject _asteroidHit;
 
     void Start()
     {
@@ -17,7 +18,7 @@ public class CannonProjectile : MonoBehaviour
     }
 
     [ContextMenu("lziuhrgiuzhgiuh")]
-    public void Shoot(Vector3 wolrdTargetPosition)
+    public void Shoot(Vector3 wolrdTargetPosition, GameObject asteroidHit)
     {
         print("Shoot !");
         _line.enabled = true;
@@ -25,6 +26,7 @@ public class CannonProjectile : MonoBehaviour
         _line.SetPosition(1, wolrdTargetPosition);
 
         time = _laserDuration;
+        _asteroidHit = asteroidHit;
     }
 
     void Update()
@@ -36,6 +38,12 @@ public class CannonProjectile : MonoBehaviour
         float factor = 1 - (time / _laserDuration);
 
         _line.widthMultiplier = _sizeCurve.Evaluate(factor) * _laserwight;
+
+        if(_sizeCurve.Evaluate(factor) > .8f && _asteroidHit)
+        {
+            _asteroidHit.GetComponent<AsteroidLife>().Demolish();
+            _asteroidHit = null;
+        }
 
         if(time < 0)
             _line.enabled = false;

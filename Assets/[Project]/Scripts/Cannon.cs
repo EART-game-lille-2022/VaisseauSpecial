@@ -70,7 +70,7 @@ public class Cannon : MonoBehaviour
 
         if(hit.collider)
         {
-            _cannonProjectile.Shoot(hit.point);
+            _cannonProjectile.Shoot(hit.point, hit.collider.gameObject);
         }
         else
             print("Nothing hit");
