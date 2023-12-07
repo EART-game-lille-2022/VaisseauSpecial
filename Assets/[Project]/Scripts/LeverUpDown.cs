@@ -33,10 +33,10 @@ namespace UnityEngine.XR.Content.Interaction
         [Range(-90.0f, 90.0f)]
         float m_MinAngle = -90.0f;
 
-        [SerializeField]
+        /*[SerializeField]
         [Tooltip("Angle of the lever in the 'neutral' position")]
         [Range(-90.0f, 90.0f)]
-        float m_MiddleAngle = 0;
+        float m_MiddleAngle = 0;*/
 
         [SerializeField]
         [Tooltip("Events to trigger when the lever activates")]
