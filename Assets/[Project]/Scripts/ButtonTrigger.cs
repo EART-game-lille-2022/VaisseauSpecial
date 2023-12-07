@@ -5,8 +5,8 @@ using UnityEngine.Events;
 
 public class ButtonTrigger : MonoBehaviour
 {
-    private UnityEvent _onButtonActivate;
-    private UnityEvent _onButtonRelease;
+    [SerializeField] private UnityEvent _onButtonActivate;
+    [SerializeField] private UnityEvent _onButtonRelease;
     public Transform _plunger;
     private bool _isButtonTrigger;
 

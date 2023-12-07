@@ -6060,7 +6060,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d644b3fba8d7304d8be57d0240c4e04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speedMultiplier: 250
+  _horizontalSpeedMultiplier: 1
+  _verticalSpeedMultiplier: 1
   _rotationSpeed: 2
 --- !u!43 &1524337155
 Mesh:
