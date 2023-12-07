@@ -73,6 +73,6 @@ public class ShipMovement : MonoBehaviour
     {
         // _rigidbody.AddForce(transform.right * _horizontalSpeed * _direction, ForceMode.Force);
         float speed = Mathf.InverseLerp(0, 2, _speedLeft + _speedRight) * _horizontalSpeedMultiplier;
-        transform.Translate(Vector3.right * speed * Time.fixedDeltaTime * _direction);
+        transform.Translate(Vector3.forward * speed * Time.fixedDeltaTime * _direction);
     }
 }
