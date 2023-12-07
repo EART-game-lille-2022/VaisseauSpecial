@@ -5,10 +5,13 @@ using UnityEngine.XR.Content.Interaction;
 
 public class Cannon : MonoBehaviour
 {
+    [SerializeField] private CannonProjectile _cannonProjectile;
+    [Header("Button Ref :")]
     [SerializeField] private XRGripButton _buttonUp;
     [SerializeField] private XRGripButton _buttonDown;
     [SerializeField] private XRGripButton _buttonLeft;
     [SerializeField] private XRGripButton _buttonRight;
+    [SerializeField] private XRGripButton _buttonShoot;
     [SerializeField] private Transform _cameraTransform;
     [SerializeField] private float _speed;
     private Vector3 _rotateVector;
@@ -26,6 +29,8 @@ public class Cannon : MonoBehaviour
 
         _buttonRight.onPress.AddListener(LookRight);
         _buttonRight.onRelease.AddListener(StopY);
+
+        _buttonShoot.onPress.AddListener(Shoot);
     }
 
     void LookUp()
@@ -60,7 +65,16 @@ public class Cannon : MonoBehaviour
 
     void Shoot()
     {
-        
+        RaycastHit hit;
+        Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity);
+
+        if(hit.collider)
+        {
+            _cannonProjectile.Shoot(hit.point);
+        }
+        else
+            print("Nothing hit");
+
     }
 
     void Update()
