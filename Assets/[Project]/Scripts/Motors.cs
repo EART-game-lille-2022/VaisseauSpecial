@@ -6,12 +6,17 @@ public class Motors : MonoBehaviour
 {
     [SerializeField] private float _heatValue;
 
-    public void UpdateHeat(float sliderValue)
+    public void UpdateHeat(float speedFactor)
     {
-        print(sliderValue);
-        if(sliderValue > .9f)
+        print(speedFactor);
+        if(speedFactor > .9f)
         {
             _heatValue += Time.deltaTime;
+        }
+
+        if(_heatValue > 1)
+        {
+            Destroy(gameObject);
         }
     }
 }

@@ -7,30 +7,30 @@ public class Cannon : MonoBehaviour
 {
     [SerializeField] private CannonProjectile _cannonProjectile;
     [Header("Button Ref :")]
-    [SerializeField] private XRGripButton _buttonUp;
-    [SerializeField] private XRGripButton _buttonDown;
-    [SerializeField] private XRGripButton _buttonLeft;
-    [SerializeField] private XRGripButton _buttonRight;
-    [SerializeField] private XRGripButton _buttonShoot;
+    [SerializeField] private ButtonTrigger _buttonUp;
+    [SerializeField] private ButtonTrigger _buttonDown;
+    [SerializeField] private ButtonTrigger _buttonLeft;
+    [SerializeField] private ButtonTrigger _buttonRight;
+    [SerializeField] private ButtonTrigger _buttonShoot;
     [SerializeField] private Transform _cameraTransform;
     [SerializeField] private float _speed;
     private Vector3 _rotateVector;
 
     void Start()
     {
-        _buttonUp.onPress.AddListener(LookUp);
-        _buttonUp.onRelease.AddListener(StopX);
+        _buttonUp.OnButtonActivate.AddListener(LookUp);
+        _buttonUp.OnButtonRelease.AddListener(StopX);
 
-        _buttonDown.onPress.AddListener(LookDown);
-        _buttonDown.onRelease.AddListener(StopX);
+        _buttonDown.OnButtonActivate.AddListener(LookDown);
+        _buttonDown.OnButtonRelease.AddListener(StopX);
 
-        _buttonLeft.onPress.AddListener(LookLeft);
-        _buttonLeft.onRelease.AddListener(StopY);
+        _buttonLeft.OnButtonActivate.AddListener(LookLeft);
+        _buttonLeft.OnButtonRelease.AddListener(StopY);
 
-        _buttonRight.onPress.AddListener(LookRight);
-        _buttonRight.onRelease.AddListener(StopY);
+        _buttonRight.OnButtonActivate.AddListener(LookRight);
+        _buttonRight.OnButtonRelease.AddListener(StopY);
 
-        _buttonShoot.onPress.AddListener(Shoot);
+        _buttonShoot.OnButtonActivate.AddListener(Shoot);
     }
 
     void LookUp()
