@@ -6,15 +6,17 @@ using UnityEngine.Events;
 public class ButtonTrigger : MonoBehaviour
 {
     public UnityEvent _onButtonActivate;
-    private bool _isButtonTrigger = true;
+    public Transform _plunger;
+    private bool _isButtonTrigger;
     void FixedUpdate()
     {
-        if(transform.localPosition.z < 0.1 && !_isButtonTrigger){
+        if(_plunger.localPosition.z < 0.01 && !_isButtonTrigger){
             _onButtonActivate.Invoke();
             _isButtonTrigger = true;
         }
-        if(transform.localPosition.z > 0.2){
+        if(_plunger.localPosition.z > 0.02){
             _isButtonTrigger = false;
         }
+        print(_isButtonTrigger);
     }
 }
