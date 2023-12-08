@@ -42,6 +42,8 @@ namespace UnityEngine.XR.Content.Interaction
 
         IXRSelectInteractor m_Interactor;
 
+        [SerializeField] public UnityEvent<float> onLeverUpdate;
+
         /// <summary>
         /// The object that is visually grabbed and manipulated
         /// </summary>
@@ -165,6 +167,7 @@ namespace UnityEngine.XR.Content.Interaction
 
             var newValue = (maxAngleDistance < minAngleDistance);
 
+            onLeverUpdate.Invoke(Mathf.InverseLerp(m_MinAngle, m_MaxAngle, lookAngle));
             SetHandleAngle(lookAngle);
 
             SetValue(newValue);
@@ -172,13 +175,13 @@ namespace UnityEngine.XR.Content.Interaction
 
         void SetValue(bool isOn, bool forceRotation = false)
         {
-            if (m_Value == isOn)
-            {
-                if (forceRotation)
-                    SetHandleAngle(m_Value ? m_MaxAngle : m_MinAngle);
+            // if (m_Value == isOn)
+            // {
+            //     if (forceRotation)
+            //         SetHandleAngle(m_Value ? m_MaxAngle : m_MinAngle);
 
-                return;
-            }
+            //     return;
+            // }
 
             m_Value = isOn;
 
@@ -191,8 +194,8 @@ namespace UnityEngine.XR.Content.Interaction
                 m_OnLeverDeactivate.Invoke();
             }
 
-            if (!isSelected && (m_LockToValue || forceRotation))
-                SetHandleAngle(m_Value ? m_MaxAngle : m_MinAngle);
+            // if (!isSelected && (m_LockToValue || forceRotation))
+            //     SetHandleAngle(m_Value ? m_MaxAngle : m_MinAngle);
         }
 
         void SetHandleAngle(float angle)

@@ -5925,6 +5925,7 @@ GameObject:
   - component: {fileID: 1501642849}
   - component: {fileID: 1501642845}
   - component: {fileID: 1501642844}
+  - component: {fileID: 1501642850}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Untagged
@@ -6060,8 +6061,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d644b3fba8d7304d8be57d0240c4e04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speedMultiplier: 250
+  _horizontalSpeedMultiplier: 1
+  _verticalSpeedMultiplier: 1
   _rotationSpeed: 2
+--- !u!114 &1501642850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1501642843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e990465c12d5f140a066364246f603f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _heatValue: 0
+  _timeBeforExplode: 4
+  _heatSpeed: 1
+  _heatDecay: 1
 --- !u!43 &1524337155
 Mesh:
   m_ObjectHideFlags: 0
