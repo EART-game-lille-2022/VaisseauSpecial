@@ -8,10 +8,14 @@ public class Motors : MonoBehaviour
     [SerializeField] private float _heatDecay;
     [SerializeField] private float _timeBeforExplode = 10f;
     private float _heatValue;
+    private bool _isDeathSoundPlayed;
 
     public void UpdateHeat(float speedFactor)
     {
-        // print("Speed factor = " + speedFactor);
+        
+
+
+
         if(speedFactor > .9f)
         {
             _heatValue += Time.deltaTime * _heatSpeed;
@@ -24,8 +28,11 @@ public class Motors : MonoBehaviour
 
         if(_heatValue > _timeBeforExplode)
         {
-            if(GameManager.instance)
+            if(GameManager.instance && !_isDeathSoundPlayed)
+            {
+                _isDeathSoundPlayed = true;
                 GameManager.instance.ShipExplode();
+            }
         }
     }
 

@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.XR.Content.Interaction;
+using UnityEngine.PlayerLoop;
 
 public class Cannon : MonoBehaviour
 {
@@ -67,7 +68,7 @@ public class Cannon : MonoBehaviour
 
     void Shoot()
     {
-        Physics.Raycast(transform.position, transform.forward, out _hit, Mathf.Infinity);
+        Physics.Raycast(transform.position, _cameraTransform.forward, out _hit, Mathf.Infinity);
         
 
         if(_hit.collider)
@@ -75,8 +76,10 @@ public class Cannon : MonoBehaviour
             _cannonProjectile.Shoot(_hit.point, _hit.collider.gameObject);
         }
         else
-            print("Nothing hit");
+        {
 
+            print("Nothing hit");
+        }
     }
 
     void Update()
@@ -87,9 +90,7 @@ public class Cannon : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        if(_hit.collider)
-        {
-            Gizmos.DrawRay(transform.position, transform.forward);
-        }
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(transform.position, transform.forward * 10000);
     }
 }

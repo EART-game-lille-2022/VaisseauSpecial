@@ -15,8 +15,9 @@ public class GameManager : MonoBehaviour
     }
     public void ShipExplode(){
 
+        AudoiManager.instance.SFX(_deathExplosionSound);
         _deathCanvas.SetActive(true);
-        _deathExplosionSource.Play();
+        
         StartCoroutine(ReloadScene());
     }
     private IEnumerator ReloadScene(){
