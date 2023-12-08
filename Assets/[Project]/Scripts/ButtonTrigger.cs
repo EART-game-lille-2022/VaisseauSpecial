@@ -19,6 +19,7 @@ public class ButtonTrigger : MonoBehaviour
         {
             _onButtonActivate.Invoke();
             _isButtonTrigger = true;
+            AudoiManager.instance.SFX(AudoiManager.AIM_BUTTON);
             // print("trigger");
         }
         
