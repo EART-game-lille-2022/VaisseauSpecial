@@ -32,6 +32,8 @@ namespace UnityEngine.XR.Content.Interaction
         bool m_Selected = false;
         bool m_Toggled = false;
 
+        private AudioSource audioSource;
+
         /// <summary>
         /// The object that is visually pressed down
         /// </summary>
@@ -63,6 +65,7 @@ namespace UnityEngine.XR.Content.Interaction
         void Start()
         {
             SetButtonHeight(0.0f);
+            audioSource = GetComponent<AudioSource>();
         }
 
         protected override void OnEnable()
@@ -71,6 +74,7 @@ namespace UnityEngine.XR.Content.Interaction
 
             if (m_ToggleButton)
                 selectEntered.AddListener(StartTogglePress);
+                audioSource.Play();
             else
             {
                 selectEntered.AddListener(StartPress);

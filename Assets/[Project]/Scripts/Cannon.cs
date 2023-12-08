@@ -15,6 +15,7 @@ public class Cannon : MonoBehaviour
     [SerializeField] private Transform _cameraTransform;
     [SerializeField] private float _speed;
     private Vector3 _rotateVector;
+    private AudioSource audioSource;
 
     void Start()
     {
@@ -31,6 +32,8 @@ public class Cannon : MonoBehaviour
         _buttonRight.onRelease.AddListener(StopY);
 
         _buttonShoot.onPress.AddListener(Shoot);
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     void LookUp()
@@ -67,6 +70,7 @@ public class Cannon : MonoBehaviour
     {
         RaycastHit hit;
         Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity);
+        audioSource.Play();
 
         if(hit.collider)
         {
