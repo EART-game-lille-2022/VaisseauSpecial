@@ -7,20 +7,26 @@ public class AudoiManager : MonoBehaviour
     public static AudoiManager instance;
     public AudioSource _source;
 
-    public static AudioClip CANNON_SHOOT;
-    public static AudioClip OVERHEAT_ALARM;
-    public static AudioClip MOTOR_ALARM;
-    public static AudioClip AIM_BUTTON;
-    public static AudioClip SCREEN_NOTIFICATION;
-    public static AudioClip VENTILATION;
+    public AudioClip CANNON_SHOOT;
+    public AudioClip OVERHEAT_ALARM;
+    public AudioClip MOTOR_ALARM;
+    public AudioClip AIM_BUTTON;
+    public AudioClip SCREEN_NOTIFICATION;
+    public AudioClip VENTILATION;
+
 
     void Awake()
     {
         instance = this;
     }
 
+    void Start()
+    {
+        _source = GetComponent<AudioSource>();
+    }
+
     public void SFX(AudioClip toPlay)
     {
-
+        _source.PlayOneShot(toPlay);
     }
 }

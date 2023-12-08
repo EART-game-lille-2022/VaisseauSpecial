@@ -17,9 +17,9 @@ public class ButtonTrigger : MonoBehaviour
     {
         if (_plunger.localPosition.z < 0.01 && !_isButtonTrigger)
         {
+            AudoiManager.instance.SFX(AudoiManager.instance.AIM_BUTTON);
             _onButtonActivate.Invoke();
             _isButtonTrigger = true;
-            AudoiManager.instance.SFX(AudoiManager.AIM_BUTTON);
             // print("trigger");
         }
         
