@@ -20,6 +20,7 @@ public class CannonProjectile : MonoBehaviour
     [ContextMenu("lziuhrgiuzhgiuh")]
     public void Shoot(Vector3 wolrdTargetPosition, GameObject asteroidHit)
     {
+        AudoiManager.instance.uihiruth(AudoiManager.CANNON_SHOOT);
         print("Shoot !");
         _line.enabled = true;
         _line.SetPosition(0, transform.position);

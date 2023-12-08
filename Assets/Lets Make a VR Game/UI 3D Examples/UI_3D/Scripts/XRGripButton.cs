@@ -73,8 +73,10 @@ namespace UnityEngine.XR.Content.Interaction
             base.OnEnable();
 
             if (m_ToggleButton)
+            {
                 selectEntered.AddListener(StartTogglePress);
                 audioSource.Play();
+            }
             else
             {
                 selectEntered.AddListener(StartPress);
