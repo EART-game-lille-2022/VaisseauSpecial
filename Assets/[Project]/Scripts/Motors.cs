@@ -11,7 +11,7 @@ public class Motors : MonoBehaviour
 
     public void UpdateHeat(float speedFactor)
     {
-        print("Speed factor = " + speedFactor);
+        // print("Speed factor = " + speedFactor);
         if(speedFactor > .9f)
         {
             _heatValue += Time.deltaTime * _heatSpeed;
@@ -27,8 +27,6 @@ public class Motors : MonoBehaviour
             if(GameManager.instance)
                 GameManager.instance.ShipExplode();
         }
-
-        print(GetHeatRatio());
     }
 
     public float GetHeatRatio()

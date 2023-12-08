@@ -15,6 +15,8 @@ public class Cannon : MonoBehaviour
     [SerializeField] private Transform _cameraTransform;
     [SerializeField] private float _speed;
     private Vector3 _rotateVector;
+    private RaycastHit _hit;
+
 
     void Start()
     {
@@ -65,12 +67,12 @@ public class Cannon : MonoBehaviour
 
     void Shoot()
     {
-        RaycastHit hit;
-        Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity);
+        Physics.Raycast(transform.position, transform.forward, out _hit, Mathf.Infinity);
+        
 
-        if(hit.collider)
+        if(_hit.collider)
         {
-            _cannonProjectile.Shoot(hit.point, hit.collider.gameObject);
+            _cannonProjectile.Shoot(_hit.point, _hit.collider.gameObject);
         }
         else
             print("Nothing hit");
@@ -81,5 +83,13 @@ public class Cannon : MonoBehaviour
     {
         transform.Rotate(new Vector3(0, _rotateVector.y, 0) * _speed);
         _cameraTransform.Rotate(new Vector3(_rotateVector.x, 0, 0) * _speed);
+    }
+
+    void OnDrawGizmos()
+    {
+        if(_hit.collider)
+        {
+            Gizmos.DrawRay(transform.position, transform.forward);
+        }
     }
 }
