@@ -1,0 +1,4 @@
+repository "VaisseauSpecial@ErwanDeEartsup@cloud"
+  path "/"
+    br "/main"
+    co "/main"
