@@ -10,7 +10,7 @@ public class AsteroidField : MonoBehaviour
     [Header("Rocks")]
     [SerializeField] GameObject _spaceRockPrefab;
     [Range(10f, 300f)][SerializeField] int _numberOfRocks;
-    [SerializeField] List<AsteroidLife> _asteroids;
+    [SerializeField] public List<AsteroidLife> _asteroids;
 
     private void Start()
     {
@@ -18,6 +18,7 @@ public class AsteroidField : MonoBehaviour
         {
             _transformParent = _player.transform;
             GameObject spaceRock = Instantiate(_spaceRockPrefab, _transformParent.position + Random.insideUnitSphere * Random.Range(_minRangeOfCreation, _maxRangeOfCreation), _transformParent.rotation);
+            spaceRock.transform.parent = transform;
             _asteroids.Add(spaceRock.GetComponent<AsteroidLife>());
         }
     }

@@ -4,6 +4,7 @@ public class AsteroidLife : MonoBehaviour
 {
     [SerializeField] float _startSpeed;
     [SerializeField] private ParticleSystem _deathParticle;
+    [SerializeField] private AsteroidField _field;
     private MeshRenderer _renderer;
     private Collider _collider;
 
@@ -12,6 +13,8 @@ public class AsteroidLife : MonoBehaviour
         Impulse(_startSpeed);
         _renderer = GetComponent<MeshRenderer>();
         _collider = GetComponent<Collider>();
+
+        _field = GetComponentInParent<AsteroidField>();
     }
 
     public void Demolish()
@@ -21,12 +24,14 @@ public class AsteroidLife : MonoBehaviour
             _deathParticle.Play();
             _renderer.enabled = false;
             _collider.enabled = false;
+            _field._asteroids.Remove(this);
             Destroy(gameObject, _deathParticle.main.duration);
             return;
         }
 
         Destroy(gameObject);
     }
+
     void Impulse(float Strength)
     {
         Rigidbody rb = GetComponent<Rigidbody>();
@@ -35,6 +40,5 @@ public class AsteroidLife : MonoBehaviour
 
         rb.velocity = Random.insideUnitSphere * Random.Range(-Strength, Strength);
         rb.angularVelocity = Random.insideUnitSphere * Random.Range(-Strength, Strength);
-        
     }
 }

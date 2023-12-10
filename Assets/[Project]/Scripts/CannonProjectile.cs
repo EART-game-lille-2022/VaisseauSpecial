@@ -23,7 +23,7 @@ public class CannonProjectile : MonoBehaviour
         AudoiManager.instance.SFX(AudoiManager.instance.CANNON_SHOOT);
         print("Shoot !");
         _line.enabled = true;
-        _line.SetPosition(0, transform.position);
+        _line.SetPosition(0, transform.position + Vector3.up * 10);
         _line.SetPosition(1, wolrdTargetPosition);
 
         time = _laserDuration;

@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.XR.Content.Interaction;
 
 public class ShipMovement : MonoBehaviour
 {
+    [SerializeField] private AudioSource _audioAccelerator;
+    [SerializeField] private AudioSource _audioBooster;
     [Header("Speed :")]
     [SerializeField] private float _horizontalSpeedMultiplier;
     [SerializeField] private float _verticalSpeedMultiplier;
@@ -78,9 +78,17 @@ public class ShipMovement : MonoBehaviour
     private void HorizontalMove()
     {
         // _rigidbody.AddForce(transform.right * _horizontalSpeed * _direction, ForceMode.Force);
-        float speedFactor = Mathf.InverseLerp(0, 2, _speedLeft + _speedRight) * _horizontalSpeedMultiplier;
-        _motors.UpdateHeat(speedFactor);
+        float speedFactor = Mathf.InverseLerp(0, 2, _speedLeft + _speedRight);
 
-        transform.Translate(Vector3.forward * speedFactor * Time.fixedDeltaTime * _direction);
+        _motors.UpdateHeat(speedFactor);
+        UpdateSoundEffect(speedFactor);
+
+        transform.Translate(Vector3.forward * speedFactor * Time.fixedDeltaTime * _direction * _horizontalSpeedMultiplier);
+    }
+
+    void UpdateSoundEffect(float value)
+    {
+        print(value);
+        _audioBooster.volume = Mathf.Lerp(0, 1, Mathf.InverseLerp(.4f, 1, value));
     }
 }

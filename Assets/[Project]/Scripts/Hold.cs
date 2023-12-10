@@ -8,21 +8,31 @@ public class Hold : MonoBehaviour
     [SerializeField] private Transform _door1, _door2;
     private Vector3 _door1Position, _door2Position;
     private GameObject[] _crates;
-    void Start(){
+    void Start()
+    {
         _door1Position = _door1.localPosition;
         _door2Position = _door2.localPosition;
 
         _crates = GameObject.FindGameObjectsWithTag("Crate");
+
+        foreach (GameObject item in _crates)
+        {
+            item.transform.parent = null;
+        }
     }
-    public void OpenDoor(){
+    public void OpenDoor()
+    {
         _door1.DOLocalMoveZ(_door1Position.z + 3.5f, 1f);
         _door2.DOLocalMoveZ(_door2Position.z + -3.5f, 1f);
 
-        foreach (GameObject item in _crates){
+        AudoiManager.instance.SFX(AudoiManager.instance.HOLD_DOOR_OPEN);
+
+        foreach (GameObject item in _crates)
+        {
             float randomXRotation = Random.Range(-180f, 180f);
             float randomYRotation = Random.Range(-180f, 180f);
             float randomZRotation = Random.Range(-180f, 180f);
-            Vector3 randomVector = new Vector3(randomXRotation,randomYRotation,randomZRotation);
+            Vector3 randomVector = new Vector3(randomXRotation, randomYRotation, randomZRotation);
             item.transform.rotation = Quaternion.Euler(randomVector);
 
             Rigidbody crateRigidbody = item.GetComponent<Rigidbody>();
@@ -30,14 +40,20 @@ public class Hold : MonoBehaviour
             crateRigidbody.AddForce(Vector3.right * 100);
         }
     }
-    public void CloseDoor(){
+
+    public void CloseDoor()
+    {
         _door1.DOLocalMoveZ(_door1Position.z, 1f);
         _door2.DOLocalMoveZ(_door2Position.z, 1f);
-        
-        if(_crates.Length != 0){
-            foreach (GameObject item in _crates){
-            Rigidbody crateRigidbody = item.GetComponent<Rigidbody>();
-            crateRigidbody.useGravity = true;
+
+        AudoiManager.instance.SFX(AudoiManager.instance.HOLD_DOOR_CLOSE);
+
+        if (_crates.Length != 0)
+        {
+            foreach (GameObject item in _crates)
+            {
+                Rigidbody crateRigidbody = item.GetComponent<Rigidbody>();
+                crateRigidbody.useGravity = true;
             }
         }
     }

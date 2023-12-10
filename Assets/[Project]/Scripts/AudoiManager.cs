@@ -13,6 +13,8 @@ public class AudoiManager : MonoBehaviour
     public AudioClip AIM_BUTTON;
     public AudioClip SCREEN_NOTIFICATION;
     public AudioClip VENTILATION;
+    public AudioClip HOLD_DOOR_OPEN;
+    public AudioClip HOLD_DOOR_CLOSE;
 
 
     void Awake()
